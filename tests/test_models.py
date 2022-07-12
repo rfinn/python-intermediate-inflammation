@@ -1,5 +1,6 @@
 """Tests for statistics functions within the Model layer."""
 
+import pytest
 import numpy as np
 import numpy.testing as npt
 
@@ -29,3 +30,35 @@ def test_daily_mean_integers():
     # Need to use Numpy testing functions to compare arrays
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
+
+def test_daily_max_integers():
+    """Test that ma function works for an array of positive integers."""
+    from inflammation.models import daily_max
+
+    test_input = np.array([[1, 2, 9],
+                           [3, 4, 11],
+                           [5, 6, 6]])
+    test_result = np.array([5, 6, 11])
+
+    # Need to use Numpy testing functions to compare arrays
+    npt.assert_array_equal(daily_max(test_input), test_result)
+
+def test_daily_min_integers():
+    """Test that ma function works for an array of positive integers."""
+    from inflammation.models import daily_min
+
+    test_input = np.array([[1, 2, 9],
+                           [3, 4, 11],
+                           [5, 6, 6]])
+    test_result = np.array([1, 2, 6])
+
+    # Need to use Numpy testing functions to compare arrays
+    npt.assert_array_equal(daily_min(test_input), test_result)
+
+
+def test_daily_min_string():
+    """Test for TypeError when passing strings"""
+    from inflammation.models import daily_min
+
+    with pytest.raises(TypeError):
+        error_expected = daily_min([['Hello', 'there'], ['General', 'Kenobi']])
