@@ -56,10 +56,86 @@ def patient_normalise(data):
 
     max_data = np.max(data, axis=1)
     with np.errstate(invalid='ignore', divide='ignore'):
-        normalised = data/ max_data[:, np.newaxis]
+        normalised = data / max_data[:, np.newaxis]
     normalised[np.isnan(normalised)] = 0
     normalised[normalised < 0] = 0
     #print(normalised)
     return normalised
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+class Doctor(Person):
+    def __init__(self, name, patients=None):
+        super().__init__(name)
+
+        if patients is None:
+            self.patients = []
+        else:
+            self.patients = patients
+
+    def add_patient(self, patient):
+        self.patients.append(patient)
+
+    def add_hospital(self, hospital):
+        ''' Add the hospital where the dr is working '''
+        self.hospital = hospital
+
+    def __str__(self):
+        return self.name
+
+
+class Observation:
+    def __init__(self, day, value):
+        self.day = day
+        self.value = value
+
+    def __str__(self):
+        return str(self.value)
+
+
+class Patient(Person):
+    """A patient in an inflammation study."""
+    def __init__(self, name, observations=None):
+        super().__init__(name)
+
+        if observations is None:
+            self.observations = []
+        else:
+            self.observations = observations
+
+    def add_observation(self, value, day=None):
+        if day is None:
+            try:
+                day = self.observations[-1].day + 1
+
+            except IndexError:
+                day = 0
+
+        new_observation = Observation(day, value)
+
+        self.observations.append(new_observation)
+        return new_observation
+
+
+
+
+if __name__ == '__main__':
+    alice = Patient('Alice')
+    print(alice)
+
+    obs = alice.add_observation(3)
+    print(obs)
+
+    bob = Person('Bob')
+    print(bob)
+
+    #obs = bob.add_observation(4)
+    #print(obs)
+
 
 
