@@ -60,9 +60,7 @@ class PatientSerializer(Serializer):
 
 
 
-class PatientCSVSerializer(PatientSerializer):
-    import csv
-
+class PatientJSONSerializer(PatientSerializer):
     @classmethod
     def save(cls, instances, path):
         if not isinstance(instances, list):
@@ -78,3 +76,18 @@ class PatientCSVSerializer(PatientSerializer):
         return cls.deserialize(data)
 
 
+class PatientCSVSerializer(PatientSerializer):
+    """place holder for CSV serializer"""
+    @classmethod
+    def save(cls, instances, path):
+        if not isinstance(instances, list):
+            instances = [instances]
+        with open(path, 'w') as jsonfile:
+            json.dump(cls.serialize(instances), jsonfile)
+
+    @classmethod
+    def load(cls, path):
+        with open(path) as jsonfile:
+            data = json.load(jsonfile)
+
+        return cls.deserialize(data)
