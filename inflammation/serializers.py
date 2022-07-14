@@ -58,7 +58,11 @@ class PatientSerializer(Serializer):
         return instances
 
 
-class PatientJSONSerializer(PatientSerializer):
+
+
+class PatientCSVSerializer(PatientSerializer):
+    import csv
+
     @classmethod
     def save(cls, instances, path):
         if not isinstance(instances, list):
