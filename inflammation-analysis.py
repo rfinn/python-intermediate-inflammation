@@ -35,6 +35,12 @@ def main(args):
 
             views.display_patient_record(patient)
 
+        if args.serialize:
+            patient_data = inflammation_data[args.patient]
+            observations = [models.Observation(day, value) for day, value in enumerate(patient_data)]
+            patient = models.Patient('UNKNOWN', observations)
+
+            views.serialize_json(patient)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -56,6 +62,13 @@ if __name__ == "__main__":
         type=int,
         default=0,
         help='Which patient should be displayed?')
+
+    parser.add_argument(
+        '--serialize',
+        default=False,
+        action='store_true',
+        help='Serialize the data as json file.  output file is patient-data.json.')
+
     args = parser.parse_args()
 
     main(args)

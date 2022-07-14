@@ -70,7 +70,7 @@ class Person:
         return self.name
 
 class Doctor(Person):
-    def __init__(self, name, patients=None):
+    def __init__(self, name, patients=None, hospital=None):
         super().__init__(name)
 
         if patients is None:
@@ -78,11 +78,12 @@ class Doctor(Person):
         else:
             self.patients = patients
 
+        self.hospital = hospital
     def add_patient(self, patient):
         self.patients.append(patient)
 
     def add_hospital(self, hospital):
-        ''' Add the hospital where the dr is working '''
+        """Add the hospital where the dr is working"""
         self.hospital = hospital
 
     def __str__(self):
@@ -97,6 +98,11 @@ class Observation:
     def __str__(self):
         return str(self.value)
 
+    def __eq__(self, other):
+        if (other.day == self.day) and (other.value == self.value):
+            return True
+        else:
+            return False
 
 class Patient(Person):
     """A patient in an inflammation study."""
@@ -120,6 +126,15 @@ class Patient(Person):
 
         self.observations.append(new_observation)
         return new_observation
+
+    def __eq__(self, other):
+        if self.name == other.name:
+            for obs_new, obs in zip(other.observations, self.observations):
+                if obs_new != obs:
+                    return False
+            return True
+        else:
+            return False
 
 
 

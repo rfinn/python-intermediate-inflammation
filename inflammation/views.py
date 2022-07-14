@@ -2,6 +2,7 @@
 
 from matplotlib import pyplot as plt
 import numpy as np
+from inflammation import serializers
 
 
 def visualize(data_dict):
@@ -28,5 +29,12 @@ def display_patient_record(patient):
     print(patient.name)
     for obs in patient.observations:
         print(obs.day, obs.value)
+
+def serialize_json(patients):
+    """save data for patient in json format"""
+    if not isinstance(patients,list):
+        patients = [patients]
+    output_file = 'patient-data.json'
+    serializers.PatientJSONSerializer.save(patients, output_file)
 
 
