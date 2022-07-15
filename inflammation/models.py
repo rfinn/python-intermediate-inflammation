@@ -91,7 +91,16 @@ class Doctor(Person):
 
 
 class Observation:
+    """
+    A class for storing an observation.
+    """
     def __init__(self, day, value):
+        """
+        Initialize Observation.
+        Args:
+            day: day of observation
+            value: value of observation
+        """
         self.day = day
         self.value = value
 
