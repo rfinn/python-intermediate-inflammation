@@ -7,7 +7,6 @@ from abc import ABC
 
 class Serializer(ABC):
 
-
     @classmethod
     def serialize(cls, instances):
         raise NotImplementedError
@@ -58,9 +57,6 @@ class PatientSerializer(Serializer):
             instances.append(cls.model(**item))
 
         return instances
-
-
-
 
 class PatientJSONSerializer(PatientSerializer):
     @classmethod
