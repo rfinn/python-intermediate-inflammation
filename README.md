@@ -7,6 +7,12 @@ inflammation studies.
 
 ## Main features
 
+photos of doggos
+
+
+![akuma](https://github.com/rfinn/python-intermediate-inflammation/Akuma.jpg?branch=doggos)
+
+
 Here are some key features of Inflam:
 
 - Provide basic statistical analyses over clinical trial data
