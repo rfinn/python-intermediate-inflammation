@@ -10,7 +10,7 @@ inflammation studies.
 photos of doggos
 
 
-![akuma](https://github.com/rfinn/python-intermediate-inflammation/Akuma.jpg?branch=doggos)
+![akuma](Akuma.jpg)
 
 
 Here are some key features of Inflam:
