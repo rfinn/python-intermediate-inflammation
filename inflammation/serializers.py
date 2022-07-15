@@ -6,6 +6,8 @@ from inflammation import models
 from abc import ABC
 
 class Serializer(ABC):
+
+
     @classmethod
     def serialize(cls, instances):
         raise NotImplementedError
